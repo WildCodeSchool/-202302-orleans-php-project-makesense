@@ -16,7 +16,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'decisions' => $decisionRepository->findBy([], ['startDate' =>  'DESC']),
-            'statuss' => $statusRepository->findAll(),
+            'statuses' => $statusRepository->findAll(),
         ]);
     }
 }
