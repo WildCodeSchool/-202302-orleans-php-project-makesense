@@ -19,6 +19,14 @@
 			<ul class="dropdown-menu"></ul>
 		</div>
 	</div>
+    <div class="dropdown  mx-2">
+		<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			Personnes expertes
+		</button>
+		<ul class="dropdown-menu">
+		</ul>
+	</div>
+    </div>
 	<div class="container">
 		<h2>Titre</h2>
 		<p>{{ decision.title }}</p>
@@ -27,6 +35,9 @@
 		<h2>Description de la décision</h2>
 		<p>{{ decision.description | raw }}</p>
 	</div>
+	<a id="approve" href="{{ path('approve', {id: decision.id})}}">
+	    <i class="bi {{ app.user.isApprove(decision) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up' }} text-success fs-2"></i>
+	</a>
 	<div class="container">
 		<a class="btn btn-primary mt-3" href="{{ path("app_decision_index") }}">Retour à la liste</a>
 		<div class="accordion" id="accordionExample">

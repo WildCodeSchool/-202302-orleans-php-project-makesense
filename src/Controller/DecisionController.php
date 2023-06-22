@@ -9,6 +9,7 @@ use App\Form\DecisionType;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\DecisionRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,5 +92,20 @@ class DecisionController extends AbstractController
         }
 
         return $this->redirectToRoute('app_decision_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/approve', name: 'approve', methods: ["GET", "POST"])]
+    public function addToApprove(Decision $decision, UserRepository $userRepository): Response
+    {
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
+        if ($user->isApprove($decision)) {
+            $user->removeApprove($decision);
+        } else {
+            $user->addApprove($decision);
+        }
+        $userRepository->save($user, true);
+
+        return $this->json(['isApprove' => $this->getUser()->isApprove($decision)]);
     }
 }

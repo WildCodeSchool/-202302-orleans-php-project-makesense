@@ -38,6 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->comments = new ArrayCollection();
         $this->decisions = new ArrayCollection();
+        $this->approve = new ArrayCollection();
     }
 
     #[ORM\Column(length: 255)]
@@ -48,6 +49,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Decision::class)]
     private Collection $decisions;
+
+    #[ORM\ManyToMany(targetEntity: Decision::class, inversedBy: 'voter')]
+    #[ORM\JoinTable(name: 'approve')]
+    private Collection $approve;
 
     public function getId(): ?int
     {
@@ -200,5 +205,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Decision>
+     */
+    public function getApprove(): Collection
+    {
+        return $this->approve;
+    }
+
+    public function addApprove(Decision $approve): static
+    {
+        if (!$this->approve->contains($approve)) {
+            $this->approve->add($approve);
+        }
+
+        return $this;
+    }
+
+    public function removeApprove(Decision $approve): static
+    {
+        $this->approve->removeElement($approve);
+
+        return $this;
+    }
+
+    public function isApprove(Decision $decision): bool
+    {
+        return $this->approve->contains($decision);
     }
 }

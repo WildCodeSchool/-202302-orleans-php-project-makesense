@@ -43,9 +43,13 @@ class Decision
     #[ORM\ManyToOne(inversedBy: 'decisions')]
     private ?User $user = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'approve')]
+    private Collection $voter;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->voter = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +117,18 @@ class Decision
         return $this;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Comment>
      */
@@ -134,7 +150,6 @@ class Decision
     public function removeComment(Comment $comment): static
     {
         if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
             if ($comment->getDecision() === $this) {
                 $comment->setDecision(null);
             }
@@ -142,14 +157,29 @@ class Decision
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return Collection<int, User>
+     */
+    public function getVoter(): Collection
     {
-        return $this->user;
+        return $this->voter;
     }
 
-    public function setUser(?User $user): static
+    public function addVoter(User $voter): static
     {
-        $this->user = $user;
+        if (!$this->voter->contains($voter)) {
+            $this->voter->add($voter);
+            $voter->addApprove($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVoter(User $voter): static
+    {
+        if ($this->voter->removeElement($voter)) {
+            $voter->removeApprove($this);
+        }
 
         return $this;
     }
