@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Decision::class)]
     private Collection $decisions;
 
+    #[ORM\Column]
+    private ?bool $isActivated = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -198,6 +201,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $decision->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isIsActivated(): ?bool
+    {
+        return $this->isActivated;
+    }
+
+    public function setIsActivated(bool $isActivated): static
+    {
+        $this->isActivated = $isActivated;
 
         return $this;
     }

@@ -28,49 +28,20 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/user/new', name: 'user_new', methods: ['GET', 'POST'])]
-    public function userNew(Request $request, UserRepository $userRepository): Response
+    #[Route('/user/{id}/activate', name: 'user_activate', methods: ['POST'])]
+    public function userActivate(User $user, UserRepository $userRepository): Response
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $user->setIsActivated(true);
+        $userRepository->save($user, true);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->save($user, true);
-
-            return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('admin_user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/user/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
-    public function userEdit(Request $request, User $user, UserRepository $userRepository): Response
+    #[Route('/user/{id}/deactivate', name: 'user_desactivate', methods: ['POST'])]
+    public function userDeactivate(User $user, UserRepository $userRepository): Response
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->save($user, true);
-
-            return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('admin_user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/user/{id}', name: 'user_delete', methods: ['POST'])]
-    public function userDelete(Request $request, User $user, UserRepository $userRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-            $userRepository->remove($user, true);
-        }
+        $user->setIsActivated(false);
+        $userRepository->save($user, true);
 
         return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
     }

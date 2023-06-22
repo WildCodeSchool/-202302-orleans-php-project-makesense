@@ -18,7 +18,7 @@
 					<th>Nom</th>
 					<th>Prénom</th>
 					<th>Status</th>
-					<th></th>
+					<th>Compte</th>
 
 				</tr>
 			</thead>
@@ -37,11 +37,16 @@
 							{% endif %}
 						</td>
 						<td>
-							<a class="btn btn-sm btn-outline-primary" href="{{ path('admin_user_edit', {'id': user.id}) }}">
-								{% include 'icons/pencil.svg'%}
-								Modifier</a>
+							{% if user.isActivated %}
+								<form action="{{ path('admin_user_desactivate', {'id': user.id}) }}" method="post">
+									<button class="btn btn-success btn-sm" type="submit">Activé</button>
+								</form>
+							{% else %}
+								<form action="{{ path('admin_user_activate', {'id': user.id}) }}" method="post">
+									<button class="btn btn-danger btn-sm" type="submit">Désactivé</button>
+								</form>
+							{% endif %}
 						</td>
-
 					</tr>
 				{% else %}
 					<tr>
