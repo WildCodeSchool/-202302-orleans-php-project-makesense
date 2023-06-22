@@ -30,3 +30,12 @@
     vertical-align: middle;
     font-family: $font-text;
 }
+
+.btn-pills {
+  background-color: $fourthly;
+  color: white;
+}
+
+.btn-pills:hover {
+  background-color: darken($fourthly, 20%);
+}

@@ -12,6 +12,13 @@
 	<main class="container">
 		<h1 class="text_primary">Gestion des utilisateurs</h1>
 
+		<div class="mb-3">
+			<form action="{{ path('admin_user_index') }}" method="get" class="d-flex">
+				<input type="text" name="search" placeholder="Rechercher par nom" class="form-control me-2">
+				<button type="submit" class="btn btn-primary btn-pills">Rechercher</button>
+			</form>
+		</div>
+
 		<table class="table table-success table-striped table-header-fixed">
 			<thead>
 				<tr>
@@ -41,7 +48,6 @@
 								{% include 'icons/pencil.svg'%}
 								Modifier</a>
 						</td>
-
 					</tr>
 				{% else %}
 					<tr>
