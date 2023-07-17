@@ -1,10 +1,49 @@
-# Project 3 - Starter Kit - Symfony
+# Project 3 - MAKE SENSE - Symfony
 
-## Presentation
+## Présentation
+Voici un outil de gestion de prises de décisions développé pour la plateforme interne de l'association MAKE SENSE. 
+Cet outil permet d'y retrouver un suivi des décisions en cours et passées.
+Authentification sécurisée, gestions des users, CRUD, navigation...
 
-This starter kit is here to easily start a repository for Wild Code School students.
+## Prérequis
+Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
+PHP 
+Composer
+Yarn
+MySQL 
+Bootstrap
 
-It's symfony website-skeleton project with some additional library (webpack, fixtures) and tools to validate code standards.
+## Installation
+Suivez les étapes ci-dessous pour installer et configurer le projet :
+
+1/ Clonez le dépôt Git :
+git clone https://github.com/nom-utilisateur/nom-projet.git
+
+2/ Accédez au répertoire du projet :
+cd nom du projet
+
+3 / Installez les dépendances PHP avec Composer :
+composer install
+
+4/ Configurez les variables d'environnement :
+.env.local
+
+5 / Créez la base de données :
+symfony/console doctrine:database:create
+
+6/ Appliquez les migrations :
+symfony/console doctrine:migrations:migrate
+
+7/ Chargez les données de démonstration (fixtures) :
+symfony/console doctrine:fixtures:load
+
+8/ Installez les dépendances front-end :
+yarn install
+
+9/ Utilisation
+symfony/console server:start
+Accédez à l'application dans votre navigateur à l'adresse http://localhost:8000.
+
 
 * GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
 
@@ -18,108 +57,4 @@ It's symfony website-skeleton project with some additional library (webpack, fix
 
     * Tasks to check if vendor, .idea, env.local are not versionned,
     * PHP_CodeSniffer, PHPStan and PHPmd with same configuration as GrumPHP.
-
-## Getting Started for Students
-
-### Prerequisites
-
-1. Check composer is installed
-2. Check yarn & node are installed
-
-### Install
-
-1. Clone this project
-2. Run `composer install`
-3. Run `yarn install`
-4. Run `yarn encore dev` to build assets
-
-### Working
-
-1. Run `symfony server:start` to launch your local php web server
-2. Run `yarn run dev --watch` to launch your local server for assets (or `yarn dev-server` do the same with Hot Module Reload activated)
-
-### Testing
-
-1. Run `php ./vendor/bin/phpcs` to launch PHP code sniffer
-2. Run `php ./vendor/bin/phpstan analyse src --level max` to launch PHPStan
-3. Run `php ./vendor/bin/phpmd src text phpmd.xml` to launch PHP Mess Detector
-4. Run `./node_modules/.bin/eslint assets/js` to launch ESLint JS linter
-
-### Windows Users
-
-If you develop on Windows, you should edit you git configuration to change your end of line rules with this command:
-
-`git config --global core.autocrlf true`
-
-The `.editorconfig` file in root directory do this for you. You probably need `EditorConfig` extension if your IDE is VSCode.
-
-### Run locally with Docker
-
-1. Fill DATABASE_URL variable in .env.local file with
-`DATABASE_URL="mysql://root:password@database:3306/<choose_a_db_name>"`
-2. Install Docker Desktop an run the command:
-```bash
-docker-compose up -d
-```
-3. Wait a moment and visit http://localhost:8000
-
-
-## Deployment
-
-Some files are used to manage automatic deployments (using tools as Caprover, Docker and Github Action). Please do not modify them.
-
-* [Dockerfile](/Dockerfile) Web app configuration for Docker container
-* [docker-entry.sh](/docker-entry.sh) shell instruction to execute when docker image is built
-* [nginx.conf](/ginx.conf) Nginx server configuration
-* [php.ini](/php.ini) Php configuration
-
-
-## Built With
-
-* [Symfony](https://github.com/symfony/symfony)
-* [GrumPHP](https://github.com/phpro/grumphp)
-* [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
-* [PHPStan](https://github.com/phpstan/phpstan)
-* [PHPMD](http://phpmd.org)
-* [ESLint](https://eslint.org/)
-* [Sass-Lint](https://github.com/sasstools/sass-lint)
-
-
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-
-## Authors
-
-Wild Code School trainers team
-
-## License
-
-MIT License
-
-Copyright (c) 2019 aurelien@wildcodeschool.fr
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-## Acknowledgments
 
