@@ -4,7 +4,9 @@
     font-size: 12px;
     padding: 4px 8px;
 }
-
+.rounded-circle {
+    object-fit: cover;
+}
 .card {
     background-image: url('../images/fond-signup.png');
     background-repeat: no-repeat;
