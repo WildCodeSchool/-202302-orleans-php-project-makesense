@@ -1,12 +1,18 @@
-main{
+.bg-image{
     background-image: url('../images/mapCreme.png');
-    background-position: center top 20px;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     height :80vh;
-    
-  
 }
+main {
+    background-image: url('../images/map.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 90vh;
+}
+
 .navbar{
     border-bottom: 4px solid #FFF30D;
 }

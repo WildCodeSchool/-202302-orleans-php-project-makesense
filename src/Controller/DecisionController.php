@@ -29,7 +29,7 @@ class DecisionController extends AbstractController
     public function index(DecisionRepository $decisionRepository): Response
     {
 
-        return $this->render('decision/index.html.twig', [
+        return $this->render('admin/admin_decision/index.html.twig', [
             'decisions' => $decisionRepository->findAll(),
         ]);
     }
@@ -89,6 +89,14 @@ class DecisionController extends AbstractController
         return $this->render('decision/new.html.twig', [
             'decision' => $decision,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/archive', name: 'app_archive')]
+    public function archive(DecisionRepository $decisionRepository): Response
+    {
+        return $this->render('decision/archive.html.twig', [
+            'decisions' => $decisionRepository->findall(),
         ]);
     }
 
