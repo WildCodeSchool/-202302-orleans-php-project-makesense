@@ -5,6 +5,7 @@
     padding: 4px 8px;
 }
 
+
 .card {
     background-image: url('../images/fond-signup.png');
     background-repeat: no-repeat;
@@ -16,6 +17,10 @@
     padding: clamp(50px, 17%, 100px);
     padding-top: 75px;
     text-align: center;
+
+    img {
+        object-fit: cover;
+    }
 }
 
 .upload-container {
