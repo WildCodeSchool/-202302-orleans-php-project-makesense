@@ -21,12 +21,32 @@ class DecisionFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < self::DECISION_NUMBER; $i++) {
             $decision = new Decision();
 
+            $nbImpactedUsers = mt_rand(1, 5);
+            $nbExpertUsers = mt_rand(1, 5);
+
+            for ($j = 0; $j < $nbImpactedUsers; $j++) {
+                $impactedUsers[] = $this->getReference('user_' . $faker->numberBetween(0, 39));
+            }
+
+            for ($j = 0; $j < $nbExpertUsers; $j++) {
+                $expertUsers[] = $this->getReference('user_' . $faker->numberBetween(0, 40));
+            }
+
+            foreach ($impactedUsers as $impactedUser) {
+                $decision->addImpactedUser($impactedUser);
+            }
+            foreach ($expertUsers as $expertUser) {
+                $decision->addExpertUser($expertUser);
+            }
+
             $decision->setTitle($faker->realText(50));
             $decision->setStartDate($faker->dateTimeBetween('-3 years', 'now'));
             $decision->setDescription($faker->paragraph(200));
             $decision->setCurrentPlace(array_rand(Decision::STATUS));
             $decision->setCategory($this->getReference('category_' . $faker->numberBetween(0, 4)));
             $decision->setUser($this->getReference('user_' . $faker->numberBetween(0, 40)));
+
+
             $this->addReference('decision_' . $i, $decision);
             $manager->persist($decision);
         }
@@ -34,8 +54,8 @@ class DecisionFixtures extends Fixture implements DependentFixtureInterface
 
 
         $decision = new Decision();
-        $decision->setTitle('new test');
-        $decision->setStartDate($faker->dateTimeBetween('-3 years', 'now'));
+        $decision->setTitle('Décision Sensée');
+        $decision->setStartDate($faker->dateTimeBetween('now'));
         $decision->setDescription($faker->paragraph(200));
         $decision->setCurrentPlace('opened');
         $decision->setCategory($this->getReference('category_' . $faker->numberBetween(0, 4)));
@@ -45,8 +65,8 @@ class DecisionFixtures extends Fixture implements DependentFixtureInterface
 
 
         $decision = new Decision();
-        $decision->setTitle('new test 2');
-        $decision->setStartDate($faker->dateTimeBetween('-3 years', 'now'));
+        $decision->setTitle('Choix Raisonnable');
+        $decision->setStartDate($faker->dateTimeBetween('now'));
         $decision->setDescription($faker->paragraph(200));
         $decision->setCurrentPlace('opened');
         $decision->setCategory($this->getReference('category_' . $faker->numberBetween(0, 4)));
@@ -55,8 +75,8 @@ class DecisionFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($decision);
 
         $decision = new Decision();
-        $decision->setTitle('new test 3');
-        $decision->setStartDate($faker->dateTimeBetween('-3 years', 'now'));
+        $decision->setTitle('Option Éclairée');
+        $decision->setStartDate($faker->dateTimeBetween('now'));
         $decision->setDescription($faker->paragraph(200));
         $decision->setCurrentPlace('opened');
         $decision->setCategory($this->getReference('category_' . $faker->numberBetween(0, 4)));
@@ -65,8 +85,8 @@ class DecisionFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($decision);
 
         $decision = new Decision();
-        $decision->setTitle('new test 4');
-        $decision->setStartDate($faker->dateTimeBetween('-3 years', 'now'));
+        $decision->setTitle('Résolution Intelligente');
+        $decision->setStartDate($faker->dateTimeBetween('now'));
         $decision->setDescription($faker->paragraph(200));
         $decision->setCurrentPlace('opened');
         $decision->setCategory($this->getReference('category_' . $faker->numberBetween(0, 4)));
@@ -75,8 +95,8 @@ class DecisionFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($decision);
 
         $decision = new Decision();
-        $decision->setTitle('new test 5');
-        $decision->setStartDate($faker->dateTimeBetween('-3 years', 'now'));
+        $decision->setTitle('Directive Perspicace');
+        $decision->setStartDate($faker->dateTimeBetween('now'));
         $decision->setDescription($faker->paragraph(200));
         $decision->setCurrentPlace('opened');
         $decision->setCategory($this->getReference('category_' . $faker->numberBetween(0, 4)));
