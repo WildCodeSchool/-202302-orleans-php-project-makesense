@@ -1,11 +1,56 @@
 @import "variables";
 
+
+.label{
+    display: flex;
+    gap : 0.5rem;
+}
+.user{
+    display: flex;
+    gap : 1rem;
+    align-items: baseline;
+}
+.rounded-circle{
+    width: 40px;
+    height: auto;
+}
+.label-status {
+    background-color: transparentize($primary, 0.5);
+    border: 2px solid transparentize($light, 0.5);
+}
+.label-category {
+    background-color: transparentize($secondary, 0.2);
+    border: 2px solid transparentize($light, 0.4);
+}
+.text-decoration-none {
+    text-decoration: none;
+}
+.decision-container {
+    max-width: 1100px;
+    margin: 3rem auto; 
+    padding: 4rem 6rem 3rem 6rem;
+    background-color: transparentize($secondary, 0.70);
+}
+.decision-container-vote{
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.container-comment{
+    
+    margin: 0 auto;
+}
+
+.accordion-item{
+    
+    margin: 0 auto;
+}
 p {
     font-family: $font-text;
 }
 
 h2 {
     font-family: $font-title;
+    margin-block-start: 2rem;
 }
 
 .btn {
@@ -55,4 +100,23 @@ h2 {
         height: 60px;
         border-radius: 50%;
     }
+}
+
+.like, .dislike{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vote{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.button-vote{
+    gap : 2rem;
+        font-family: $font-text;
+        font-size: 20px;
+        color: transparentize($primary, 0.25);
 }
